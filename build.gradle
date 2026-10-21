@@ -9,7 +9,12 @@ version = mod_version
 group = mod_group_id
 
 base {
-    archivesName = mod_id
+    archivesName = 'ftbclaimchunkbackup'
+}
+
+// Lets local builds keep generated Forge caches outside the checkout.
+if (System.getenv('FTB_BACKUP_BUILD_DIR')) {
+    layout.buildDirectory = file(System.getenv('FTB_BACKUP_BUILD_DIR'))
 }
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
@@ -53,7 +58,7 @@ minecraft {
     // However, it must be at "META-INF/accesstransformer.cfg" in the final mod jar to be loaded by Forge.
     // This default location is a best practice to automatically put the file in the right place in the final jar.
     // See https://docs.minecraftforge.net/en/latest/advanced/accesstransformers/ for more information.
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -112,6 +117,8 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    maven { url = 'https://maven.ftb.dev/releases' }
+    maven { url = 'https://maven.architectury.dev/' }
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
@@ -130,6 +137,13 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
+    // FTB Chunks is supplied by the modpack at runtime. Deobfuscate its API for ForgeGradle.
+    compileOnly(fg.deobf('dev.ftb.mods:ftb-chunks-forge:2001.3.8')) { transitive = false }
+    compileOnly(fg.deobf('dev.ftb.mods:ftb-library-forge:2001.2.9')) { transitive = false }
+    compileOnly(fg.deobf('dev.ftb.mods:ftb-teams-forge:2001.3.1')) { transitive = false }
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
@@ -144,6 +158,10 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+}
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

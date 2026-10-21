@@ -1,0 +1,12 @@
+{
+  "simplebackups.backup_started": "Backup started...",
+  "simplebackups.backup_finished": "Backup completed in %s (%s | %s)",
+  "simplebackups.backup_errors": "%s error(s) occurred during backup",
+  "simplebackups.backup_failed_delete": "Backup failed (deleting unfinished file) - please check your log file for more information",
+  "simplebackups.backup_failed_continue": "Backup creation failed early, some files may not be backed up - please check your log file for more information to prevent data loss",
+  "simplebackups.backups_paused": "Backups paused",
+  "simplebackups.commands.only_modified": "Not only modified files are being backed up, please check your configuration file",
+  "simplebackups.commands.is_merging": "A merge operation is already in progress",
+  "simplebackups.commands.finished": "Merging backups completed successfully",
+  "simplebackups.not_enough_space": "Not enough space on disk to create backup. Aborted!"
+}

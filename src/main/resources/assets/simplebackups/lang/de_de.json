@@ -1,0 +1,12 @@
+{
+  "simplebackups.backup_started": "Backup gestartet...",
+  "simplebackups.backup_finished": "Backup fertiggestellt in %s (%s | %s)",
+  "simplebackups.backup_errors": "Während des Backups traten %s Fehler auf",
+  "simplebackups.backup_failed_delete": "Backup fehlgeschlagen (lösche unfertige Datei) - bitte überprüfe deine Log-Datei für weitere Informationen",
+  "simplebackups.backup_failed_continue": "Backuperstellung schlug frühzeitig fehl, manche Dateien könnten nicht mit gesichert sein - bitte überprüfe deine Log-Datei für weitere Informationen, um Datenverlust zu vermeiden",
+  "simplebackups.backups_paused": "Backups pausiert",
+  "simplebackups.commands.only_modified": "Es werden nicht nur veränderte Dateien gesichert, prüfe deine Konfigurationsdatei",
+  "simplebackups.commands.is_merging": "Ein Zusammenführungsvorgang ist bereits im Gange",
+  "simplebackups.commands.finished": "Zusammenführen der Backups erfolgreich abgeschlossen",
+  "simplebackups.not_enough_space": "Nicht genug Speicherplatz auf dem Datenträger, um das Backup zu erstellen. Vorgang abgebrochen!"
+}
